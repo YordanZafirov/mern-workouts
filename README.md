@@ -11,3 +11,5 @@ This application is created with React, NodeJS and MongoDB.
 From the NodeJS I have created GET request to show all the workouts to the browser, POST request to create a new workout, DELETE request to delete a workout and PATCH request to update existing workouts. I've also created a GET request to show a single workout, that I haven't implemented in the front-end.
 
 On the front-end, a React component is created to manage the form that saves workout information to the database. Another component is created to display the saved information, allowing users to easily delete or update their workouts. To ensure seamless data flow between components, a Context is created and a custom hook is developed for easy access to the Context.
+
+Future features are user authentication and creation.
