@@ -1,6 +1,6 @@
-import { createContext, useReducer } from 'react'
+import { createContext, useReducer } from 'react';
 
-export const WorkoutsContext = createContext()
+export const WorkoutsContext = createContext();
 
 const initialState = {
   workouts: [],

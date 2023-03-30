@@ -1,24 +1,31 @@
 import React, { useState } from 'react';
 import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 const EditWorkoutForm = ({ workout, setIsEditing, setWorkouts }) => {
   const { dispatch } = useWorkoutsContext();
+  const { user } = useAuthContext()
 
   const [title, setTitle] = useState(workout.title);
   const [load, setLoad] = useState(workout.load);
   const [reps, setReps] = useState(workout.reps);
   const [error, setError] = useState(null);
 
-  const handleEditClick = () => {
-    setIsEditing(prev => !prev);
-  };
-
 const handleSubmit = async (event) => {
   event.preventDefault();
+  
+  if (!user) {
+    setError('You must be logged in')
+    return
+  }
+
   const workoutUpdate = { title, load, reps };
   const response = await fetch(`http://localhost:4000/api/workouts/${workout._id}`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${user.token}`
+    },
     body: JSON.stringify(workoutUpdate)
   });
   const json = await response.json();
