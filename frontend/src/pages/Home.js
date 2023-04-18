@@ -14,21 +14,21 @@ const Home = () => {
 
   useEffect(() => {
     const fetchWorkouts = async () => {
-      const response = await fetch('http://localhost:4000/api/workouts/',{
+      const response = await fetch('https://workouts-api-1tq5.onrender.com/api/workouts/',{
         headers: {
           'Authorization' : `Bearer ${user.token}`
         }
       })
       const json = await response.json()
 
-      if (response.ok) {
-        setWorkouts(json);
+      if (response.ok  && JSON.stringify(json) !== JSON.stringify(workouts)) {
+        dispatch({type: 'SET_WORKOUTS', payload: json})
       }
     }
     if(user){
       fetchWorkouts()
     }
-  }, [setWorkouts, dispatch, user])
+  }, [workouts, dispatch, user]);
 
   return (
     <div className="home">
